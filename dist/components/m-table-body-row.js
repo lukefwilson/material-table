@@ -430,8 +430,7 @@ var MTableBodyRow = /*#__PURE__*/function (_React$Component) {
             treeDataMaxLevel: treeDataMaxLevel
           }));
         }
-      }), this.props.data.tableData && this.props.data.tableData.showDetailPanel && /*#__PURE__*/React.createElement(_TableRow["default"] // selected={this.props.index % 2 === 0}
-      , null, this.props.data.tableData.showDetailPanel(this.props.data)));
+      }), this.props.data.tableData && this.props.data.tableData.showDetailPanel && /*#__PURE__*/React.createElement(React.Fragment, null, this.props.data.tableData.showDetailPanel(this.props.data)));
     }
   }]);
   return MTableBodyRow;

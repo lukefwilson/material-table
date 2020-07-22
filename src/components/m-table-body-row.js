@@ -321,11 +321,9 @@ export default class MTableBodyRow extends React.Component {
           })
         }
         {this.props.data.tableData && this.props.data.tableData.showDetailPanel &&
-          <TableRow
-          // selected={this.props.index % 2 === 0}
-          >
+          <>
             {this.props.data.tableData.showDetailPanel(this.props.data)}
-          </TableRow>
+          </>
         }
       </>
     );
