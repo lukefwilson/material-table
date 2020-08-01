@@ -35,7 +35,7 @@ export class MTableToolbar extends React.Component {
     const dataToExport = this.props.exportAllData ? this.props.data : this.props.renderData;
     const data = dataToExport.map(rowData =>
       columns.map(columnDef => {
-        if (columnDef.csvValue) return columnDef.csvValue(rowData);
+        if (columnDef.exportValue) return columnDef.exportValue(rowData);
         return this.props.getFieldValue(rowData, columnDef);
       })
     );
