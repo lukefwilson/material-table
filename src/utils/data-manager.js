@@ -230,7 +230,7 @@ export default class DataManager {
     this.sorted = false;
   }
 
-  changeColumnHidden(column, hidden) {    
+  changeColumnHidden(column, hidden) {
     column.hidden = hidden;
   }
 

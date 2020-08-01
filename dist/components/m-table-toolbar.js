@@ -82,6 +82,7 @@ var MTableToolbar = /*#__PURE__*/function (_React$Component) {
       var dataToExport = _this.props.exportAllData ? _this.props.data : _this.props.renderData;
       var data = dataToExport.map(function (rowData) {
         return columns.map(function (columnDef) {
+          if (columnDef.csvValue) return columnDef.csvValue(rowData);
           return _this.props.getFieldValue(rowData, columnDef);
         });
       });
