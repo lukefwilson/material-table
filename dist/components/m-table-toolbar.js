@@ -11,6 +11,8 @@ exports["default"] = exports.styles = exports.MTableToolbar = void 0;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -80,6 +82,24 @@ var MTableToolbar = /*#__PURE__*/function (_React$Component) {
       });
 
       var dataToExport = _this.props.exportAllData ? _this.props.data : _this.props.renderData;
+      var grouped = false;
+
+      _this.props.columns.forEach(function (column) {
+        if (column.defaultGroupOrder > -1) grouped = true;
+      });
+
+      if (grouped) {
+        var flattenedData = [];
+        dataToExport.forEach(function (groupData) {
+          var groupRows = groupData.data.filter(function (rowData) {
+            return !rowData._tablePlaceholder;
+          }); // filter out placeholder data
+
+          flattenedData = [].concat((0, _toConsumableArray2["default"])(flattenedData), (0, _toConsumableArray2["default"])(groupRows));
+        });
+        dataToExport = flattenedData;
+      }
+
       var data = dataToExport.map(function (rowData) {
         return columns.map(function (columnDef) {
           if (columnDef.exportValue) return columnDef.exportValue(rowData);

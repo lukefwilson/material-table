@@ -32,7 +32,22 @@ export class MTableToolbar extends React.Component {
         return !columnDef.hidden && columnDef.field && columnDef.export !== false;
       })
       .sort((a, b) => (a.tableData.columnOrder > b.tableData.columnOrder) ? 1 : -1);
-    const dataToExport = this.props.exportAllData ? this.props.data : this.props.renderData;
+    let dataToExport = this.props.exportAllData ? this.props.data : this.props.renderData;
+
+    let grouped = false;
+    this.props.columns.forEach(column => {
+      if (column.defaultGroupOrder > -1) grouped = true;
+    });
+
+    if (grouped) {
+      let flattenedData = [];
+      dataToExport.forEach(groupData => {
+        let groupRows = groupData.data.filter((rowData) => !rowData._tablePlaceholder); // filter out placeholder data
+        flattenedData = [...flattenedData, ...groupRows];
+      });
+      dataToExport = flattenedData;
+    }
+
     const data = dataToExport.map(rowData =>
       columns.map(columnDef => {
         if (columnDef.exportValue) return columnDef.exportValue(rowData);
